@@ -1,10 +1,70 @@
-const firstCard = 4;
-const secondCard = 9;
+const messageEl = document.getElementById('message-el');
+const cardsEl = document.getElementById('cards');
+const sumEl = document.getElementById('add-it');
+const playerEl = document.getElementById('cash-out');
+const player = {
+  name: 'Per',
+  chips: 200,
+};
 
-let sum = firstCard + secondCard;
+let cards = [];
+let sum = 0;
+let gotBlackJack = false;
+let onLine = false;
+let note = '';
 
-function count() {
-  sum += sum;
+playerEl.textContent = `${player.name}: $${player.chips}`;
+
+function getRandomCard() {
+  const randomNumber = Math.floor(Math.random() * 13) + 1;
+  if (randomNumber > 10) {
+    return 10;
+  }
+  if (randomNumber === 1) {
+    return 11;
+  }
+  return randomNumber;
 }
 
-count();
+function renderGame() {
+  cardsEl.textContent = 'Cards: ';
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < cards.length; i++) {
+    cardsEl.textContent += `${cards[i]} `;
+  }
+
+  sumEl.textContent = `Sum: ${sum}`;
+  if (sum <= 20) {
+    note = 'Do you want to draw a new card?';
+    messageEl.style.color = 'yellow';
+  } else if (sum === 21) {
+    note = "You've got Blackjack!";
+    messageEl.style.color = 'greenyellow';
+    gotBlackJack = true;
+  } else {
+    note = "You're out of the game!";
+    messageEl.style.color = 'red';
+    onLine = false;
+  }
+  messageEl.textContent = note;
+}
+
+// eslint-disable-next-line no-unused-vars
+function startGame() {
+  onLine = true;
+  const firstCard = getRandomCard();
+  const secondCard = getRandomCard();
+  cards = [firstCard, secondCard];
+  sum = firstCard + secondCard;
+  renderGame();
+}
+
+// eslint-disable-next-line no-unused-vars
+function newCard() {
+  if (onLine === true && gotBlackJack === false) {
+    const card = getRandomCard();
+    sum += card;
+    cards.push(card);
+    renderGame();
+  }
+}
