@@ -52,6 +52,7 @@ function renderGame() {
 // eslint-disable-next-line no-unused-vars
 function startGame() {
   onLine = true;
+  gotBlackJack = false;
   const firstCard = getRandomCard();
   const secondCard = getRandomCard();
   cards = [firstCard, secondCard];
@@ -61,7 +62,7 @@ function startGame() {
 
 // eslint-disable-next-line no-unused-vars
 function newCard() {
-  if (onLine === true && gotBlackJack === false) {
+  if (onLine && !gotBlackJack) {
     const card = getRandomCard();
     sum += card;
     cards.push(card);
