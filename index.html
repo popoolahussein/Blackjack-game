@@ -10,6 +10,11 @@
     />
     <title>Black Jack Game</title>
     <link rel="stylesheet" href="/src/css/style.css" />
+    <script type="module">
+      import { startGame, newCard } from '/src/js/main.js';
+      window.startGame = startGame;
+      window.newCard = newCard;
+    </script>
   </head>
   <body>
     <main>
@@ -21,6 +26,5 @@
       <button onclick="newCard()">NEW CARD</button>
       <p id="cash-out"></p>
     </main>
-    <script src="/src/js/main.js"></script>
   </body>
 </html>
