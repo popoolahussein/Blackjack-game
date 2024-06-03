@@ -27,22 +27,9 @@ function getRandomCard() {
   return randomNumber;
 }
 
-// eslint-disable-next-line no-unused-vars
-function startGame() {
-  onLine = true;
-  gotBlackJack = false;
-  const firstCard = getRandomCard();
-  const secondCard = getRandomCard();
-  cards = [firstCard, secondCard];
-  sum = firstCard + secondCard;
-  // eslint-disable-next-line no-use-before-define
-  renderGame();
-}
-
 function renderGame() {
   cardsEl.textContent = 'Cards: ';
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < cards.length; i++) {
+  for (let i = 0; i < cards.length; i += 1) {
     cardsEl.textContent += `${cards[i]} `;
   }
 
@@ -62,7 +49,16 @@ function renderGame() {
   messageEl.textContent = note;
 }
 
-// eslint-disable-next-line no-unused-vars
+function startGame() {
+  onLine = true;
+  gotBlackJack = false;
+  const firstCard = getRandomCard();
+  const secondCard = getRandomCard();
+  cards = [firstCard, secondCard];
+  sum = firstCard + secondCard;
+  renderGame();
+}
+
 function newCard() {
   if (onLine && !gotBlackJack) {
     const card = getRandomCard();
@@ -71,3 +67,6 @@ function newCard() {
     renderGame();
   }
 }
+
+window.startGame = startGame;
+window.newCard = newCard;
