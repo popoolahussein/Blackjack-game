@@ -2,6 +2,7 @@ const messageEl = document.getElementById('message-el');
 const cardsEl = document.getElementById('cards');
 const sumEl = document.getElementById('add-it');
 const playerEl = document.getElementById('cash-out');
+
 const player = {
   name: 'Per',
   chips: 200,
@@ -26,6 +27,18 @@ function getRandomCard() {
   return randomNumber;
 }
 
+// eslint-disable-next-line no-unused-vars
+function startGame() {
+  onLine = true;
+  gotBlackJack = false;
+  const firstCard = getRandomCard();
+  const secondCard = getRandomCard();
+  cards = [firstCard, secondCard];
+  sum = firstCard + secondCard;
+  // eslint-disable-next-line no-use-before-define
+  renderGame();
+}
+
 function renderGame() {
   cardsEl.textContent = 'Cards: ';
   // eslint-disable-next-line no-plusplus
@@ -47,17 +60,6 @@ function renderGame() {
     onLine = false;
   }
   messageEl.textContent = note;
-}
-
-// eslint-disable-next-line no-unused-vars
-function startGame() {
-  onLine = true;
-  gotBlackJack = false;
-  const firstCard = getRandomCard();
-  const secondCard = getRandomCard();
-  cards = [firstCard, secondCard];
-  sum = firstCard + secondCard;
-  renderGame();
 }
 
 // eslint-disable-next-line no-unused-vars
