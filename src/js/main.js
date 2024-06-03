@@ -14,7 +14,7 @@ let gotBlackJack = false;
 let onLine = false;
 let note = '';
 
-playerEl.innerHTML = `${player.name}: $${player.chips}`;
+playerEl.textContent = `${player.name}: $${player.chips}`;
 
 function getRandomCard() {
   const randomNumber = Math.floor(Math.random() * 13) + 1;
@@ -28,12 +28,12 @@ function getRandomCard() {
 }
 
 function renderGame() {
-  cardsEl.innerHTML = 'Cards: ';
+  cardsEl.textContent = 'Cards: ';
   for (let i = 0; i < cards.length; i += 1) {
-    cardsEl.innerHTML += `${cards[i]} `;
+    cardsEl.textContent += `${cards[i]} `;
   }
 
-  sumEl.innerHTML = `Sum: ${sum}`;
+  sumEl.textContent = `Sum: ${sum}`;
   if (sum <= 20) {
     note = 'Do you want to draw a new card?';
     messageEl.style.color = 'yellow';
@@ -46,10 +46,10 @@ function renderGame() {
     messageEl.style.color = 'red';
     onLine = false;
   }
-  messageEl.innerHTML = note;
+  messageEl.textContent = note;
 }
 
-function startGame() {
+export function startGame() {
   onLine = true;
   gotBlackJack = false;
   const firstCard = getRandomCard();
@@ -59,7 +59,7 @@ function startGame() {
   renderGame();
 }
 
-function newCard() {
+export function newCard() {
   if (onLine && !gotBlackJack) {
     const card = getRandomCard();
     sum += card;
@@ -67,6 +67,3 @@ function newCard() {
     renderGame();
   }
 }
-
-window.startGame = startGame;
-window.newCard = newCard;
